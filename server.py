@@ -1,17 +1,11 @@
 import os
-import logging
 import sys
 from paste import deploy
 from wsgiref.simple_server import make_server
-
-LOG = logging.getLogger(__name__)
-
 module_dir = os.path.normpath(os.path.join(os.path.abspath(sys.argv[0]), os.pardir, os.pardir))
-
 sys.path.insert(0, module_dir)
-
 bind_host = "127.0.0.1"
-bind_port = 8181
+bind_port = 8182
 
 
 def server(app_name, conf_file):
@@ -21,17 +15,13 @@ def server(app_name, conf_file):
 
 
 def load_paste_app(app_name, conf_file):
-    LOG.debug("Loading %(app_name) from &(conf_file)",
-              {'app_name': app_name, 'conf_file': conf_file})
     try:
         app = deploy.loadapp("config:%s" % os.path.abspath(conf_file), name=app_name)
         return app
     except(LookupError, ImportError) as e:
-        LOG.error(str(e))
         raise RuntimeError(str(e))
 
-
 if __name__ == '__main__':
-    app_name = "laowuview"
+    app_name = "main"
     conf_file = "laowuview.ini"
     server(app_name, conf_file)

@@ -1,4 +1,3 @@
-import logging
 import routes.middleware
 import webob.dec
 import webob.exc
@@ -6,7 +5,7 @@ import webob.exc
 
 class Router(object):
 
-    def __init__(self, mapper=None):
+    def __init__(self, mapper):
         self.map = mapper
         self._router = routes.middleware.RoutesMiddleware(self._dispatch, self.map)
 
@@ -22,7 +21,6 @@ class Router(object):
     @webob.dec.wsgify
     def _dispatch(req):
         match = req.environ['wsgiorg.routing_args'][1]
-        print match
         if not match:
             return webob.exc.HTTPNotFound()
         app = match['controller']
