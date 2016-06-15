@@ -8,7 +8,6 @@ class Controller(object):
     def __init__(self):
         self.text = "hellow world"
 
-
     def index(self, req):
         self.match = req.environ['wsgiorg.routing_args'][1]
         response = Response(request=req, status=httplib.MULTIPLE_CHOICES, content_type='application/json')

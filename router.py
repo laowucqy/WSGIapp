@@ -15,6 +15,6 @@ class compute(wsgi.Router):
                        conditions={'method': ['GET']})
         mapper.connect("/sub/{a}&{b}", controller=sub_resource, action="getMessage",
                        conditions={'method': ['GET']})
-        super(compute, self).__init__(mapper)
 
+        super(compute, self).__init__(mapper)
 

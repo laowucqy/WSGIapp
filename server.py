@@ -17,6 +17,7 @@ def server(app_name, conf_file):
 def load_paste_app(app_name, conf_file):
     try:
         app = deploy.loadapp("config:%s" % os.path.abspath(conf_file), name=app_name)
+        print app
         return app
     except(LookupError, ImportError) as e:
         raise RuntimeError(str(e))
