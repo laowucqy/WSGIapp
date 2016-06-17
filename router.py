@@ -2,7 +2,7 @@ import routes
 import wsgi
 import add
 import sub
-
+import login_factory
 
 class compute(wsgi.Router):
 
@@ -18,3 +18,12 @@ class compute(wsgi.Router):
 
         super(compute, self).__init__(mapper)
 
+class login(wsgi.Router):
+
+    def __init__(self, mapper=None):
+        if(mapper is None):
+            mapper = routes.Mapper()
+        resource = login_factory.create_resource()
+        mapper.connect("/{username}&{passwd}", controller=resource, action="getMessage",
+                       conditions={'method': ['GET']})
+        super(login, self).__init__(mapper)

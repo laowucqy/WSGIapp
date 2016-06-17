@@ -4,8 +4,8 @@ from paste import deploy
 from wsgiref.simple_server import make_server
 module_dir = os.path.normpath(os.path.join(os.path.abspath(sys.argv[0]), os.pardir, os.pardir))
 sys.path.insert(0, module_dir)
-bind_host = "127.0.0.1"
-bind_port = 8182
+bind_host = "192.168.202.133"
+bind_port = 8000
 
 
 def server(app_name, conf_file):
