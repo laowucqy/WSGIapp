@@ -1,6 +1,6 @@
 from pprint import pprint
 import re
-
+import os
 
 class filter_factory(object):
     def __init__(self, app):
@@ -49,12 +49,27 @@ class filter03(filter_factory):
         super(filter03, self).__init__(app)
 
     def __call__(self, environ, start_response):
-        if "HTTP_COOKIE" in environ :
-            if environ["HTTP_COOKIE"] == 'token=1846310132123':
-                return self.app(environ, start_response)
+        if "HTTP_COOKIE" in environ and os.path.exists("token.dat")==True :
+            fp = open("token.dat", 'r')
+            #print environ["HTTP_COOKIE"]
+            for eachLine in fp:
+                #print 'TOKEN=' + eachLine
+                if 'TOKEN=' + eachLine[0:36] == environ["HTTP_COOKIE"]:
+                    fp.close()
+                    return self.app(environ, start_response)
+            fp.close()
         start_response(
             '403 Forbidden', [('Content-type', 'text/html')])
         return ['please login']
+
+class filter04(filter_factory):
+    def __init__(self, app):
+        super(filter04, self).__init__(app)
+
+    def __call__(self, environ,start_response):
+        return self.app(environ, start_response)
+
+
 
 
 

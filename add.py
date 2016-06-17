@@ -10,7 +10,7 @@ class Controller(object):
 
     def index(self, req):
         match = req.environ['wsgiorg.routing_args'][1]
-        pprint(req.environ)
+        #pprint(req.environ)
         if "HTTP_COOKIE" in req.environ:
             print req.environ['HTTP_COOKIE']
         print req.cookies

@@ -23,6 +23,9 @@ def load_paste_app(app_name, conf_file):
         raise RuntimeError(str(e))
 
 if __name__ == '__main__':
+    fp = open("token.dat", 'wb')
+    fp.close()
+    os.remove("token.dat")
     app_name = "main"
     conf_file = "laowuview.ini"
     server(app_name, conf_file)
