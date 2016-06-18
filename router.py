@@ -4,6 +4,7 @@ import add
 import sub
 import login_factory
 
+
 class compute(wsgi.Router):
 
     def __init__(self, mapper=None):
@@ -17,6 +18,7 @@ class compute(wsgi.Router):
                        conditions={'method': ['GET']})
 
         super(compute, self).__init__(mapper)
+
 
 class login(wsgi.Router):
 
