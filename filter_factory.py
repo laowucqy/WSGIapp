@@ -2,6 +2,9 @@ from pprint import pprint
 import re
 import os
 
+import webob.dec
+
+
 class filter_factory(object):
     def __init__(self, app):
         self.app = app
@@ -66,6 +69,7 @@ class filter04(filter_factory):
     def __init__(self, app):
         super(filter04, self).__init__(app)
 
+    #@webob.dec.wsgify
     def __call__(self, environ,start_response):
         return self.app(environ, start_response)
 
